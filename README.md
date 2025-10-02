@@ -248,4 +248,4 @@ Live Demo: [https://clearpath-dev.github.io/terminal-portfolio](https://clearpat
 
 ⭐ Star this repo if you find it useful!
 
-Made with 💚 by [Your Name]
+Made with 💚 by Tyler Guitroz
