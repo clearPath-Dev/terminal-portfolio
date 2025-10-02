@@ -242,7 +242,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 Project Link: [https://github.com/clearpath-dev/terminal-portfolio](https://github.com/clearpath-dev/terminal-portfolio)
 
-Live Demo: [https://clearpath-dev.github.io/terminal-portfolio](https://clearpath-dev.github.io/terminal-portfolio)
+Live Demo: [https://terminal-port-project.netlify.app/](https://terminal-port-project.netlify.app/)
 
 ---
 
