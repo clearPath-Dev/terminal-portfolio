@@ -6,8 +6,8 @@ const nextConfig = {
     unoptimized: true
   },
   // Configure for GitHub Pages deployment
-  basePath: process.env.NODE_ENV === 'production' ? '/terminal-portfolio' : '',
-  assetPrefix: process.env.NODE_ENV === 'production' ? '/terminal-portfolio' : '',
+  basePath: process.env.NODE_ENV === 'production' ? '/your-repo-name' : '',
+  assetPrefix: process.env.NODE_ENV === 'production' ? '/your-repo-name/' : '',
 }
 
 module.exports = nextConfig
