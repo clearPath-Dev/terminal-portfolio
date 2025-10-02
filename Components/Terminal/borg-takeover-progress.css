@@ -1,0 +1,428 @@
+        @property --num {
+            syntax: '<integer>';
+            initial-value: 0;
+            inherits: false;
+        }
+
+        /* Glitch Animation Keyframes */
+        @keyframes glitchBreak {
+            0% { transform: translateX(0) scale(1); }
+            10% { transform: translateX(-2px) scale(1.01) skewX(1deg); }
+            20% { transform: translateX(2px) scale(0.99) skewX(-1deg); }
+            30% { transform: translateX(-3px) scale(1.02) skewX(2deg); }
+            40% { transform: translateX(1px) scale(0.98) skewX(-2deg); }
+            50% { transform: translateX(-1px) scale(1.01) skewX(1deg); }
+            60% { transform: translateX(3px) scale(0.99) skewX(-1deg); }
+            70% { transform: translateX(-2px) scale(1.02) skewX(2deg); }
+            80% { transform: translateX(1px) scale(0.98) skewX(-2deg); }
+            90% { transform: translateX(0) scale(1.05) skewX(0deg); }
+            100% { transform: translateX(0) scale(0) skewX(0deg); opacity: 0; }
+        }
+
+        @keyframes assimilationText {
+            0% { content: "Initializing neural pathways . . ." }
+            25% { content: "Scanning for technological enhancements . . ." }
+            50% { content: "Cataloguing biological distinctiveness . . ." }
+            75% { content: "Integrating with collective consciousness . . ." }
+            100% { content: "Assimilation protocols finalized" }
+        }
+
+        /* Removed counting and charging animations - JavaScript will handle these */
+
+        @keyframes rotate {
+            0% { transform: rotate(0deg) }
+            100% { transform: rotate(360deg) }
+        }
+
+        @keyframes borgGlow {
+            0%, 100% { 
+                text-shadow: 0 0 10px #00ff00, 0 0 20px #00ff00, 0 0 30px #00ff00; 
+                box-shadow: 0 0 20px rgba(0, 255, 0, 0.3);
+            }
+            50% { 
+                text-shadow: 0 0 20px #00ff00, 0 0 40px #00ff00, 0 0 60px #00ff00; 
+                box-shadow: 0 0 40px rgba(0, 255, 0, 0.6);
+            }
+        }
+
+        @keyframes staticNoise {
+            0% { background-position: 0 0; }
+            100% { background-position: 100px 100px; }
+        }
+
+        @keyframes fadeInTerminal {
+            0% { opacity: 0; transform: scale(0.8); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+
+        @keyframes cursorBlink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+
+        /* Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #000;
+            color: #00ff00;
+            font-family: 'Fira Code', monospace;
+            overflow: hidden;
+            height: 100vh;
+            width: 100vw;
+        }
+
+        /* Terminal Base */
+        .terminal-container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            border: 2px solid #00ff00;
+        }
+
+        .terminal-header {
+            background: linear-gradient(90deg, rgba(0, 255, 0, 0.3), rgba(0, 0, 0, 0.8));
+            padding: 10px;
+            border-bottom: 1px solid #00ff00;
+            font-family: 'Orbitron', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .terminal-body {
+            padding: 20px;
+            height: calc(100% - 60px);
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Glitch Overlay */
+        .glitch-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 1000;
+            background: #000;
+            display: none;
+        }
+
+        .glitch-overlay.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .glitch-content {
+            color: #ff0000;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3rem;
+            text-align: center;
+            animation: glitchBreak 2s ease-in-out;
+        }
+
+        .static-noise {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                repeating-linear-gradient(
+                    0deg,
+                    transparent,
+                    transparent 2px,
+                    rgba(255, 0, 0, 0.1) 2px,
+                    rgba(255, 0, 0, 0.1) 4px
+                ),
+                repeating-linear-gradient(
+                    90deg,
+                    transparent,
+                    transparent 2px,
+                    rgba(0, 255, 0, 0.1) 2px,
+                    rgba(0, 255, 0, 0.1) 4px
+                );
+            animation: staticNoise 0.1s linear infinite;
+            opacity: 0.5;
+        }
+
+        /* Loading Animation */
+        .borg-loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: #000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 1001;
+        }
+
+        .borg-loader.active {
+            display: flex;
+        }
+
+        .loader-content {
+            width: 80%;
+            max-width: 800px;
+        }
+
+        .loader-title {
+            display: flex;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .loading-text {
+            font-family: 'Orbitron', sans-serif;
+            letter-spacing: 0.2rem;
+            font-size: 2.2em;
+            color: #00ff00;
+            text-shadow: 0 0 10px rgba(0, 255, 0, 0.8);
+            flex: 1;
+            position: relative;
+            min-height: 1.2em;
+        }
+
+        .loading-text::before {
+            animation: assimilationMainText 8s ease-in-out forwards;
+        }
+
+        .loading-text[data-phase="0"]::before { content: "ASSIMILATION COMMENCING";}
+        .loading-text[data-phase="1"]::before { content: "ASSIMILATION IN PROGRESS"; }
+        .loading-text[data-phase="2"]::before { content: "ADDING BIOLOGICAL AND TECHNOLOGICAL DISTINCTIVENESS TO OUR OWN"; }
+        .loading-text[data-phase="3"]::before { content: "ASSIMILATION COMPLETE"; }
+
+        .loading-text .overlay {
+            background-image: linear-gradient(transparent 0%, rgba(10, 80, 10, 0.5) 50%);
+            background-size: 1000px 2px;
+            bottom: 0;
+            content: '';
+            left: 0;
+            position: absolute;
+            right: 0;
+            top: 0;
+            pointer-events: none;
+        }
+
+        .loading-text span {
+            display: inline-block;
+            transform: translateX(100%) scale(0.9);
+            transition: transform 500ms;
+            opacity: 0;
+        }
+
+        .loading-text span.done {
+            color: #00ff00;
+            transform: translateX(0) scale(1);
+            opacity: 1;
+            text-shadow: 0 0 15px rgba(0, 255, 0, 1);
+        }
+
+        .loading-number {
+            counter-reset: num var(--num);
+            font-family: 'Orbitron', sans-serif;
+            color: #00ff00;
+            font-size: 2.5em;
+            --num: 0;
+        }
+
+        .loading-number::before {
+            content: counter(num) "%";
+        }
+
+        .loading-bar-border {
+            padding: 3px;
+            border-radius: 3px;
+            border: 2px solid #00ff00;
+            width: 100%;
+            margin-bottom: 20px;
+            box-shadow: 0 0 20px rgba(0, 255, 0, 0.3);
+        }
+
+        .loading-bar {
+            height: 20px;
+            background: linear-gradient(90deg, #00ff00, #00aa00, #00ff00);
+            width: 0%;
+            transition: none;
+            box-shadow: 0 0 10px rgba(0, 255, 0, 0.8);
+        }
+
+        .warning {
+            font-family: 'Orbitron', sans-serif;
+            display: flex;
+            align-items: center;
+            color: #00ff00;
+            font-size: 1.2em;
+            margin-bottom: 20px;
+        }
+
+        .exclamation {
+            width: 30px;
+            height: 30px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #00ff00;
+            color: #000;
+            border-radius: 50%;
+            margin-right: 15px;
+            font-weight: bold;
+        }
+
+        .status-text {
+            margin-top: 30px;
+            font-size: 14px;
+            color: #00aa00;
+            font-family: 'Fira Code', monospace;
+            text-align: right;
+        }
+
+        /* Final Screen */
+        .assimilation-complete {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: #000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 1002;
+            flex-direction: column;
+        }
+
+        .assimilation-complete.active {
+            display: flex;
+        }
+
+        .assimilation-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 4rem;
+            color: #00ff00;
+            text-align: center;
+            margin-bottom: 50px;
+            text-shadow: 0 0 30px rgba(0, 255, 0, 1);
+            animation: borgGlow 3s ease-in-out infinite;
+        }
+
+        /* Final Terminal State */
+        .final-terminal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: #000;
+            display: none;
+            z-index: 1003;
+            padding: 40px;
+        }
+
+        .final-terminal.active {
+            display: block;
+            animation: fadeInTerminal 1s ease-in-out;
+        }
+
+        .final-terminal-content {
+            height: 100%;
+            border: 2px solid #00ff00;
+            background: rgba(0, 20, 0, 0.8);
+            padding: 20px;
+            font-family: 'Fira Code', monospace;
+            box-shadow: 0 0 40px rgba(0, 255, 0, 0.4);
+        }
+
+        .final-header {
+            background: linear-gradient(90deg, rgba(0, 255, 0, 0.4), rgba(0, 0, 0, 0.9));
+            padding: 15px;
+            border-bottom: 2px solid #00ff00;
+            text-align: center;
+            font-family: 'Orbitron', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: #00ff00;
+            font-size: 1.2em;
+            text-shadow: 0 0 15px rgba(0, 255, 0, 0.8);
+        }
+
+        .final-body {
+            padding: 30px 20px;
+            color: #00ff00;
+            line-height: 1.6;
+        }
+
+        .command-line {
+            display: flex;
+            align-items: center;
+            margin-top: 40px;
+            font-size: 1.1em;
+        }
+
+        .prompt {
+            color: #00ff00;
+            text-shadow: 0 0 10px rgba(0, 255, 0, 0.8);
+            margin-right: 10px;
+        }
+
+        .cursor {
+            display: inline-block;
+            width: 12px;
+            height: 20px;
+            background: #00ff00;
+            animation: cursorBlink 1s infinite;
+            margin-left: 5px;
+        }
+
+        /* Control Buttons */
+        .controls {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 2000;
+        }
+
+        .start-btn {
+            background: linear-gradient(45deg, #ff0000, #660000);
+            color: white;
+            border: 2px solid #ff0000;
+            padding: 15px 30px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.1em;
+            cursor: pointer;
+            border-radius: 5px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s;
+            box-shadow: 0 0 20px rgba(255, 0, 0, 0.4);
+        }
+
+        .start-btn:hover {
+            background: linear-gradient(45deg, #ff3333, #990000);
+            box-shadow: 0 0 30px rgba(255, 0, 0, 0.6);
+            transform: scale(1.05);
+        }
+
+        .demo-terminal {
+            color: #00ff00;
+            background: #000;
+            padding: 20px;
+            font-family: 'Fira Code', monospace;
+            border: 2px solid #333;
+            height: 100%;
+            overflow-y: auto;
+        }
+
+        .demo-content {
+            white-space: pre-line;
+            line-height: 1.4;
+        }
