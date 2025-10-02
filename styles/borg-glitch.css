@@ -1,0 +1,647 @@
+/* Import fonts needed for Borg effects */
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&display=swap');
+
+/* ========================================
+   RESPONSIVE DESIGN & ACCESSIBILITY
+======================================== */
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .borg-loading-content {
+    width: 95%;
+    padding: 10px;
+  }
+  
+  .borg-loading-title {
+    flex-direction: column;
+    gap: 20px;
+    text-align: center;
+  }
+  
+  .borg-loading-text {
+    text-align: center;
+    font-size: clamp(1em, 5vw, 1.5em);
+  }
+  
+  .borg-loading-number {
+    text-align: center;
+    font-size: clamp(1.2em, 6vw, 2em);
+  }
+  
+  .borg-warning {
+    flex-direction: column;
+    text-align: center;
+    gap: 10px;
+  }
+  
+  .borg-exclamation {
+    margin-right: 0;
+    margin-bottom: 10px;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .borg-loading-overlay {
+    background: #000;
+  }
+  
+  .borg-loading-text,
+  .borg-loading-number {
+    text-shadow: none;
+    font-weight: bold;
+  }
+  
+  .borg-loading-bar {
+    background: #00ff41;
+    box-shadow: none;
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .borg-loading-overlay,
+  .borg-assimilation-complete,
+  .terminal-assimilated,
+  .borg-loading-text::before,
+  .borg-loading-bar::after,
+  .borg-loading-bar-border::before,
+  .borg-exclamation,
+  .borg-assimilation-title,
+  .input-borg-glitch {
+    animation: none;
+  }
+  
+  .borg-loading-bar {
+    transition: width 0.3s ease;
+  }
+  
+  .input-borg-glitch {
+    background: rgba(0, 255, 65, 0.2) !important;
+  }
+}
+
+/* Print styles */
+@media print {
+  .borg-loading-overlay,
+  .borg-assimilation-complete {
+    display: none;
+  }
+}
+
+/* Focus states for accessibility */
+.terminal-borg input:focus {
+  outline: 2px solid #00ff41;
+  outline-offset: 2px;
+}
+
+.terminal-assimilated input:focus {
+  outline: 3px solid #00ff41;
+  outline-offset: 3px;
+  box-shadow: 0 0 20px rgba(0, 255, 65, 0.6);
+}
+
+/* Screen reader support */
+.borg-loading-overlay[aria-hidden="true"],
+.borg-assimilation-complete[aria-hidden="true"] {
+  display: none;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ========================================
+   UTILITY CLASSES
+======================================== */
+
+/* Borg color utilities */
+.borg-text-primary {
+  color: var(--borg-primary, #00ff41) !important;
+}
+
+.borg-text-secondary {
+  color: var(--borg-secondary, #00aa00) !important;
+}
+
+.borg-bg-primary {
+  background-color: var(--borg-primary, #00ff41) !important;
+}
+
+.borg-border-primary {
+  border-color: var(--borg-primary, #00ff41) !important;
+}
+
+/* Borg effect utilities */
+.borg-glow {
+  text-shadow: 0 0 10px var(--borg-primary, #00ff41);
+  box-shadow: 0 0 15px rgba(0, 255, 65, 0.4);
+}
+
+.borg-pulse {
+  animation: borgSystemPulse 2s ease-in-out infinite;
+}
+
+@keyframes borgSystemPulse {
+  0%, 100% { 
+    opacity: 0.8;
+    transform: scale(1);
+  }
+  50% { 
+    opacity: 1;
+    transform: scale(1.02);
+  }
+}INPUT GLITCH EFFECTS
+/* ======================================== */
+
+/* Borg Input Auto-completion Glitch */
+.input-borg-glitch {
+  animation: borgInputGlitch 0.2s linear infinite;
+  background: rgba(0, 255, 65, 0.1) !important;
+  text-shadow: 0 0 10px #00ff41 !important;
+  color: #00ff41 !important;
+}
+
+@keyframes borgInputGlitch {
+  0% { 
+    transform: translateX(0);
+    filter: brightness(1);
+  }
+  10% { 
+    transform: translateX(-1px);
+    filter: brightness(1.2) hue-rotate(90deg);
+  }
+  20% { 
+    transform: translateX(1px);
+    filter: brightness(0.8) hue-rotate(-90deg);
+  }
+  30% { 
+    transform: translateX(-1px);
+    filter: brightness(1.5);
+  }
+  40% { 
+    transform: translateX(1px);
+    filter: brightness(0.6) hue-rotate(180deg);
+  }
+  50% { 
+    transform: translateX(0);
+    filter: brightness(1.8);
+  }
+  60% { 
+    transform: translateX(1px);
+    filter: brightness(0.4) hue-rotate(-180deg);
+  }
+  70% { 
+    transform: translateX(-1px);
+    filter: brightness(2);
+  }
+  80% { 
+    transform: translateX(0);
+    filter: brightness(0.2);
+  }
+  90% { 
+    transform: translateX(1px);
+    filter: brightness(3) hue-rotate(270deg);
+  }
+  100% { 
+    transform: translateX(0);
+    filter: brightness(1);
+  }
+}
+
+/* Borg Auto-completion Effect */
+.borg-autocomplete {
+  color: #00ff41 !important;
+  text-shadow: 0 0 15px #00ff41 !important;
+  background: linear-gradient(90deg, 
+    rgba(0, 255, 65, 0.1) 0%, 
+    rgba(0, 255, 65, 0.3) 50%, 
+    rgba(0, 255, 65, 0.1) 100%) !important;
+  animation: borgAutocompleteGlow 1s ease-in-out;
+}
+
+@keyframes borgAutocompleteGlow {
+  0% { 
+    transform: scale(1);
+    box-shadow: 0 0 0 rgba(0, 255, 65, 0);
+  }
+  50% { 
+    transform: scale(1.02);
+    box-shadow: 0 0 20px rgba(0, 255, 65, 0.8);
+  }
+  100% { 
+    transform: scale(1);
+    box-shadow: 0 0 10px rgba(0, 255, 65, 0.4);
+  }
+}
+
+/* ========================================
+   LOADING SCREEN ANIMATIONS
+======================================== */
+
+/* Main Loading Overlay */
+.borg-loading-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: linear-gradient(135deg,
+    rgba(0, 0, 0, 0.98) 0%,
+    rgba(0, 20, 0, 0.99) 25%,
+    rgba(0, 40, 0, 0.99) 75%,
+    rgba(0, 0, 0, 0.98) 100%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  color: #00ff41;
+  font-family: 'Share Tech Mono', monospace;
+  text-align: center;
+  animation: borgLoadingEntry 1.5s ease-out;
+}
+
+@keyframes borgLoadingEntry {
+  0% { 
+    opacity: 0; 
+    transform: scale(0.8) rotateY(90deg);
+    filter: blur(10px);
+  }
+  50% {
+    opacity: 0.7;
+    transform: scale(1.1) rotateY(45deg);
+    filter: blur(5px);
+  }
+  100% { 
+    opacity: 1; 
+    transform: scale(1) rotateY(0deg);
+    filter: blur(0px);
+  }
+}
+
+/* Loading Content Container */
+.borg-loading-content {
+  width: 85%;
+  max-width: 900px;
+  perspective: 1000px;
+}
+
+.borg-loading-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 40px;
+  padding: 20px;
+  border: 1px solid rgba(0, 255, 65, 0.3);
+  border-radius: 8px;
+  background: rgba(0, 255, 65, 0.05);
+  backdrop-filter: blur(10px);
+}
+
+/* Loading Text with Scanning Effect */
+.borg-loading-text {
+  font-family: 'Orbitron', sans-serif;
+  letter-spacing: 0.2rem;
+  font-size: clamp(1.2em, 4vw, 2.2em);
+  color: #00ff41;
+  text-shadow: 0 0 15px rgba(0, 255, 65, 0.8);
+  flex: 1;
+  text-align: left;
+  position: relative;
+  overflow: hidden;
+}
+
+.borg-loading-text::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, 
+    transparent 0%, 
+    rgba(0, 255, 65, 0.4) 50%, 
+    transparent 100%);
+  animation: borgTextScan 3s ease-in-out infinite;
+}
+
+@keyframes borgTextScan {
+  0% { left: -100%; }
+  50% { left: 100%; }
+  100% { left: -100%; }
+}
+
+/* Loading Percentage Display */
+.borg-loading-number {
+  font-family: 'Orbitron', sans-serif;
+  color: #00ff41;
+  font-size: clamp(1.5em, 5vw, 2.5em);
+  text-shadow: 0 0 20px rgba(0, 255, 65, 1);
+  min-width: 120px;
+  text-align: right;
+  position: relative;
+}
+
+.borg-loading-number::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  right: -20px;
+  width: 10px;
+  height: 10px;
+  background: #00ff41;
+  border-radius: 50%;
+  transform: translateY(-50%);
+  animation: borgNumberPulse 1s ease-in-out infinite;
+}
+
+@keyframes borgNumberPulse {
+  0%, 100% { 
+    box-shadow: 0 0 0 0 rgba(0, 255, 65, 0.7);
+    transform: translateY(-50%) scale(1);
+  }
+  50% { 
+    box-shadow: 0 0 0 15px rgba(0, 255, 65, 0);
+    transform: translateY(-50%) scale(1.2);
+  }
+}
+
+/* Progress Bar Container */
+.borg-progress-container {
+  margin: 30px 0;
+  position: relative;
+}
+
+.borg-loading-bar-border {
+  padding: 4px;
+  border-radius: 8px;
+  border: 2px solid #00ff41;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  box-shadow: 
+    0 0 30px rgba(0, 255, 65, 0.4),
+    inset 0 0 20px rgba(0, 255, 65, 0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+.borg-loading-bar-border::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg,
+    transparent 0%,
+    rgba(0, 255, 65, 0.3) 50%,
+    transparent 100%);
+  animation: borgBarSweep 2s linear infinite;
+}
+
+@keyframes borgBarSweep {
+  0% { left: -100%; }
+  100% { left: 100%; }
+}
+
+/* Progress Bar */
+.borg-loading-bar {
+  height: 24px;
+  background: linear-gradient(90deg, 
+    #00ff41 0%, 
+    #00aa00 25%,
+    #00ff41 50%,
+    #00cc22 75%,
+    #00ff41 100%);
+  width: 0%;
+  transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  border-radius: 4px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 
+    0 0 15px rgba(0, 255, 65, 0.8),
+    inset 0 2px 0 rgba(255, 255, 255, 0.3),
+    inset 0 -2px 0 rgba(0, 0, 0, 0.3);
+}
+
+.borg-loading-bar::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.4) 50%,
+    transparent 100%);
+  animation: borgBarShine 1.5s ease-in-out infinite;
+}
+
+@keyframes borgBarShine {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(200%); }
+}
+
+/* Warning Section */
+.borg-warning {
+  font-family: 'Orbitron', sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #00ff41;
+  font-size: clamp(0.9em, 2.5vw, 1.2em);
+  margin: 30px 0;
+  padding: 15px;
+  border: 1px solid rgba(0, 255, 65, 0.5);
+  border-radius: 6px;
+  background: rgba(0, 255, 65, 0.08);
+  backdrop-filter: blur(5px);
+  animation: borgWarningPulse 2s ease-in-out infinite;
+}
+
+@keyframes borgWarningPulse {
+  0%, 100% { 
+    border-color: rgba(0, 255, 65, 0.5);
+    background: rgba(0, 255, 65, 0.08);
+  }
+  50% { 
+    border-color: rgba(0, 255, 65, 0.8);
+    background: rgba(0, 255, 65, 0.15);
+  }
+}
+
+.borg-exclamation {
+  width: 35px;
+  height: 35px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #00ff41, #00aa00);
+  color: #000;
+  border-radius: 50%;
+  margin-right: 15px;
+  font-weight: bold;
+  font-size: 1.2em;
+  box-shadow: 0 0 20px rgba(0, 255, 65, 0.6);
+  animation: borgExclamationSpin 4s linear infinite;
+}
+
+@keyframes borgExclamationSpin {
+  0% { transform: rotate(0deg) scale(1); }
+  25% { transform: rotate(90deg) scale(1.1); }
+  50% { transform: rotate(180deg) scale(1); }
+  75% { transform: rotate(270deg) scale(1.1); }
+  100% { transform: rotate(360deg) scale(1); }
+}
+
+.borg-status-text {
+  margin-top: 40px;
+  font-size: clamp(0.7em, 2vw, 0.9em);
+  color: #00aa00;
+  font-family: 'Fira Code', monospace;
+  text-align: center;
+  opacity: 0.8;
+  font-weight: 300;
+  letter-spacing: 1px;
+}
+
+/* ========================================
+   TERMINAL CORRUPTION EFFECTS
+======================================== */
+
+/* Terminal Assimilation State */
+.terminal-assimilated {
+  animation: borgTerminalCorruption 1s ease-in-out forwards;
+  border: 3px solid #00ff41 !important;
+  box-shadow: 
+    0 0 40px rgba(0, 255, 65, 0.8),
+    inset 0 0 30px rgba(0, 255, 65, 0.2) !important;
+}
+
+@keyframes borgTerminalCorruption {
+  0% { 
+    filter: brightness(1) contrast(1);
+    transform: scale(1);
+  }
+  25% { 
+    filter: brightness(1.5) contrast(1.5) hue-rotate(90deg);
+    transform: scale(1.02);
+  }
+  50% { 
+    filter: brightness(0.8) contrast(2) hue-rotate(180deg);
+    transform: scale(0.98);
+  }
+  75% { 
+    filter: brightness(1.2) contrast(1.8) hue-rotate(270deg);
+    transform: scale(1.01);
+  }
+  100% { 
+    filter: brightness(1) contrast(1) hue-rotate(360deg);
+    transform: scale(1);
+  }
+}
+
+.terminal-assimilated .terminal-text,
+.terminal-assimilated .prompt,
+.terminal-assimilated input {
+  color: #00ff41 !important;
+  text-shadow: 0 0 10px #00ff41 !important;
+}
+
+.terminal-assimilated .cursor {
+  background: #00ff41 !important;
+  animation: borgCursorPulse 0.8s ease-in-out infinite !important;
+}
+
+@keyframes borgCursorPulse {
+  0%, 100% { 
+    opacity: 1;
+    box-shadow: 0 0 5px #00ff41;
+  }
+  50% { 
+    opacity: 0.3;
+    box-shadow: 0 0 20px #00ff41;
+  }
+}
+
+/* ========================================
+   TAKEOVER COMPLETE SCREEN
+======================================== */
+
+/* Borg Assimilation Complete Screen */
+.borg-assimilation-complete {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: radial-gradient(circle, 
+    rgba(0, 0, 0, 0.95) 0%, 
+    rgba(0, 40, 0, 0.98) 50%, 
+    rgba(0, 0, 0, 0.95) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10000;
+  flex-direction: column;
+  animation: borgCompleteEntry 2s ease-out;
+}
+
+@keyframes borgCompleteEntry {
+  0% { 
+    opacity: 0; 
+    transform: scale(0.5) rotate(180deg);
+    filter: blur(20px);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1.2) rotate(90deg);
+    filter: blur(10px);
+  }
+  100% { 
+    opacity: 1; 
+    transform: scale(1) rotate(0deg);
+    filter: blur(0px);
+  }
+}
+
+.borg-assimilation-title {
+  font-family: 'Orbitron', sans-serif;
+  font-size: clamp(2em, 8vw, 4rem);
+  color: #00ff41;
+  text-align: center;
+  margin-bottom: 50px;
+  text-shadow: 
+    0 0 20px rgba(0, 255, 65, 1),
+    0 0 40px rgba(0, 255, 65, 0.8),
+    0 0 60px rgba(0, 255, 65, 0.6);
+  animation: borgFinalGlow 3s ease-in-out infinite;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+@keyframes borgFinalGlow {
+  0%, 100% { 
+    text-shadow: 
+      0 0 20px rgba(0, 255, 65, 1),
+      0 0 40px rgba(0, 255, 65, 0.8),
+      0 0 60px rgba(0, 255, 65, 0.6);
+    transform: scale(1);
+  }
+  50% { 
+    text-shadow: 
+      0 0 30px rgba(0, 255, 65, 1),
+      0 0 60px rgba(0, 255, 65, 1),
+      0 0 90px rgba(0, 255, 65, 0.8);
+    transform: scale(1.05);
+  }
+}

@@ -1,0 +1,390 @@
+/* Star Trek Theme System - LCARS, Klingon, Borg */
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Antic+Didone&family=Hind+Guntur:wght@300;400;500;600;700&family=SUSE:wght@100&family=Special+Elite&display=swap');
+
+:root {
+  /* LCARS Color Variables - Authentic Trek Palette */
+  --lcars-blue: #8189be;
+  --lcars-orange: orange;
+  --lcars-black: #222;
+  --lcars-violet: #a582b9;
+  --lcars-red: #b55c70;
+  --lcars-white: wheat;
+  --lcars-tan: #ffa97e;
+  --lcars-primary: #ff6600;
+  --lcars-secondary: #8189be;
+  --lcars-accent: #ffa97e;
+  --lcars-panel: rgba(255, 169, 126, 0.3);
+  --lcars-font: 'Orbitron', sans-serif!important;
+
+  /* Klingon Color Variables - Blood and Fire Palette */
+  --klingon-blood-red: #cc0000;
+  --klingon-fire-orange: #ff6600;
+  --klingon-gold: #ffcc00;
+  --klingon-dark-red: #990000;
+  --klingon-bright-red: #ff0000;
+  --klingon-ember: #ff3300;
+  --klingon-bronze: #cd853f;
+  --klingon-copper: #b8860b;
+  --klingon-primary: #cc0000;
+  --klingon-secondary: #ff6600;
+  --klingon-accent: #ffcc00;
+  --klingon-font: "Special Elite", system-ui !important;
+
+  /* Borg Color Variables - Cybernetic Green Palette */
+  --borg-primary: #00ff41;
+  --borg-secondary: #00aa00;
+  --borg-tertiary: #00cc00;
+  --borg-dark-green: #006600;
+  --borg-bright-green: #00ff41;
+  --borg-cyber-green: #39ff14;
+  --borg-yellow-accent: #ffff00;
+  --borg-matrix-green: #008f11;
+  --borg-accent: #00ff41;
+  --borg-font: 'Share Tech Mono', monospace !important;
+
+  /* Additional Shared Variables */
+  --trek-shadow-light: rgba(255, 255, 255, 0.1);
+  --trek-shadow-dark: rgba(0, 0, 0, 0.8);
+  --trek-glass-blur: blur(12px);
+  --trek-panel-opacity: 0.7;
+}
+
+/* LCARS Federation Theme */
+.terminal-lcars {
+  --terminal-bg: rgba(34, 34, 34, 0.4);
+  --terminal-border: 2px solid var(--lcars-orange);
+  --terminal-text: var(--lcars-orange);
+  --terminal-font: var(--lcars-font);
+  --terminal-shadow: 0 0 30px rgba(255, 165, 0, 0.4), inset 0 0 20px rgba(255, 165, 0, 0.1);
+  --prompt-color: var(--lcars-tan);
+ --cursor-color: var(--lcars-tan);
+  --titlebar-bg: linear-gradient(90deg, 
+    rgba(255, 165, 0, 0.3) 0%, 
+    rgba(129, 137, 190, 0.2) 50%, 
+    var(--lcars-panel) 100%);
+  --titlebar-text: var(--lcars-orange);
+  --titlebar-font: var(--lcars-font);
+  --titlebar-weight: 700;
+  --titlebar-transform: uppercase;
+  --titlebar-spacing: 2px;
+  
+  border-radius: 20px;
+  backdrop-filter: blur(15px) saturate(200%);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 600;
+}
+
+/* LCARS Floating Panels - Mixed geometry */
+.terminal-lcars::before {
+  content: '';
+  position: absolute;
+  left: -80px;
+  top: 30px;
+  width: 120px;
+  height: 60%;
+  background: linear-gradient(135deg, 
+    rgba(255, 165, 0, 0.2) 0%, 
+    rgba(129, 137, 190, 0.1) 100%);
+  backdrop-filter: var(--trek-glass-blur);
+  border-radius: 25px 8px 25px 8px;
+  border: 1px solid var(--lcars-orange);
+  box-shadow: 0 0 30px rgba(255, 165, 0, 0.3);
+  z-index: -1;
+  animation: panelPulse 4s ease-in-out infinite;
+}
+
+.terminal-lcars::after {
+  content: '';
+  position: absolute;
+  right: -60px;
+  top: 50px;
+  width: 100px;
+  height: 45%;
+  background: linear-gradient(225deg, 
+    rgba(129, 137, 190, 0.2) 0%, 
+    rgba(255, 169, 126, 0.1) 100%);
+  backdrop-filter: var(--trek-glass-blur);
+  border-radius: 50px;
+  border: 1px solid var(--lcars-blue);
+  box-shadow: 0 0 25px rgba(129, 137, 190, 0.4);
+  z-index: -1;
+  animation: panelPulse 4s ease-in-out infinite reverse;
+}
+
+/* Klingon Warrior Theme */
+.terminal-klingon {
+  --terminal-bg: rgba(40, 0, 0, 0.3); /* Transparent for background effects */
+  --terminal-border: 4px solid var(--klingon-primary);
+  --terminal-text: var(--klingon-gold);
+  --terminal-font: var(--klingon-font, "Special Elite", system-ui !important);
+  --terminal-shadow: 
+    0 0 40px rgba(204, 0, 0, 0.8), 
+    inset 0 0 30px rgba(255, 102, 0, 0.1),
+    0 0 60px rgba(255, 204, 0, 0.2);
+  --prompt-color: var(--klingon-bright-red);
+  --cursor-color: var(--klingon-ember);
+  --titlebar-bg: linear-gradient(90deg,
+    rgba(204, 0, 0, 0.6) 0%,
+    rgba(102, 0, 0, 0.5) 30%,
+    rgba(255, 102, 0, 0.4) 70%,
+    rgba(255, 204, 0, 0.5) 100%);
+  --titlebar-text: var(--klingon-gold);
+  --titlebar-font: var(--klingon-font);
+  --titlebar-weight: 400;
+  
+  border-radius: 15px;
+  backdrop-filter: blur(8px) saturate(200%) contrast(150%);
+  text-shadow: 
+    1px 1px 0px var(--trek-shadow-dark),
+    0 0 4px var(--klingon-primary);
+  font-weight: 400;
+  font-family: var(--klingon-font) !important;
+  font-style: normal;
+  overflow: hidden;
+}
+
+/* Jagged battle panels with reduced movement */
+.terminal-klingon::before {
+  content: '';
+  position: absolute;
+  left: -90px;
+  top: 20px;
+  width: 140px;
+  height: 70%;
+  background: linear-gradient(135deg,
+    rgba(204, 0, 0, 0.4) 0%,
+    rgba(255, 102, 0, 0.3) 50%,
+    rgba(102, 0, 0, 0.2) 100%);
+  backdrop-filter: blur(8px);
+  border: 2px solid rgba(204, 0, 0, 0.6);
+  box-shadow: 
+    0 0 40px rgba(204, 0, 0, 0.6),
+    inset 0 0 20px rgba(255, 102, 0, 0.3);
+  clip-path: polygon(0 0, 80% 0, 100% 20%, 90% 40%, 100% 60%, 85% 80%, 100% 100%, 0 100%, 10% 80%, 0 60%, 15% 40%, 0 20%);
+  z-index: -1;
+  animation: klingon-battle-pulse 2s ease-in-out infinite;
+}
+
+.terminal-klingon::after {
+  content: '';
+  position: absolute;
+  right: -70px;
+  top: 40px;
+  width: 120px;
+  height: 55%;
+  background: linear-gradient(225deg,
+    rgba(255, 102, 0, 0.4) 0%,
+    rgba(204, 0, 0, 0.3) 50%,
+    rgba(102, 0, 0, 0.2) 100%);
+  backdrop-filter: blur(8px);
+  border: 2px solid rgba(255, 102, 0, 0.6);
+  box-shadow: 
+    0 0 35px rgba(255, 102, 0, 0.6),
+    inset 0 0 15px rgba(204, 0, 0, 0.3);
+  clip-path: polygon(20% 0, 100% 0, 100% 80%, 80% 100%, 60% 90%, 40% 100%, 20% 80%, 0 100%, 0 20%, 20% 10%);
+  z-index: -1;
+  animation: klingon-battle-pulse 2s ease-in-out infinite reverse;
+}
+
+/* Terminal header styling */
+.titlebar-klingon {
+  --titlebar-bg: linear-gradient(90deg,
+    rgba(204, 0, 0, 0.6) 0%,
+    rgba(102, 0, 0, 0.5) 30%,
+    rgba(255, 102, 0, 0.4) 70%,
+    rgba(255, 204, 0, 0.5) 100%);
+  --titlebar-border: 2px solid var(--klingon-primary);
+  --titlebar-text: var(--klingon-gold);
+  --titlebar-font: var(--klingon-font);
+  --titlebar-weight: 400;
+  font-family: var(--klingon-font);
+  letter-spacing: 2px;
+  text-shadow: 1px 1px 0px var(--trek-shadow-dark);
+}
+
+/* Terminal body with custom scrollbar */
+.terminal-klingon .terminal-body {
+  font-family: var(--klingon-font);
+  font-size: 14px;
+  line-height: 1.8;
+  text-shadow: 
+    1px 1px 0px var(--trek-shadow-dark),
+    0 0 4px var(--klingon-primary);
+  
+  /* Custom scrollbar styling */
+  scrollbar-width: thin;
+  scrollbar-color: var(--klingon-primary) rgba(40, 0, 0, 0.5);
+}
+
+/* Webkit scrollbar for aggressive look */
+.terminal-klingon .terminal-body::-webkit-scrollbar {
+  width: 12px;
+}
+
+.terminal-klingon .terminal-body::-webkit-scrollbar-track {
+  background: linear-gradient(180deg, rgba(40, 0, 0, 0.3) 0%, rgba(20, 0, 0, 0.5) 100%);
+  border-radius: 6px;
+  border: 1px solid rgba(204, 0, 0, 0.3);
+}
+
+.terminal-klingon .terminal-body::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, var(--klingon-primary) 0%, var(--klingon-dark-red) 50%, var(--klingon-primary) 100%);
+  border-radius: 6px;
+  border: 1px solid var(--klingon-bright-red);
+  box-shadow: 
+    0 0 8px rgba(204, 0, 0, 0.6),
+    inset 0 0 4px rgba(255, 0, 0, 0.3);
+}
+
+.terminal-klingon .terminal-body::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, var(--klingon-bright-red) 0%, var(--klingon-primary) 50%, var(--klingon-bright-red) 100%);
+  box-shadow: 
+    0 0 12px rgba(255, 0, 0, 0.8),
+    inset 0 0 6px rgba(255, 102, 0, 0.4);
+}
+
+.terminal-klingon .terminal-body::-webkit-scrollbar-corner {
+  background: rgba(40, 0, 0, 0.5);
+}
+
+/* Prompt styling */
+.terminal-klingon .prompt {
+  color: var(--klingon-bright-red);
+  font-weight: 400;
+  font-family: var(--klingon-font);
+  text-shadow: 1px 1px 0px var(--trek-shadow-dark), 0 0 4px var(--klingon-bright-red);
+}
+
+/* Cursor styling */
+.terminal-klingon .cursor {
+  background: var(--klingon-ember);
+}
+
+/* Additional theme-specific text styling */
+.terminal-klingon {
+  font-size: 14px;
+  line-height: 1.8;
+}
+
+/* Command output styling */
+.terminal-klingon .command-output {
+  font-family: var(--klingon-font);
+  text-shadow: 1px 1px 0px var(--trek-shadow-dark), 0 0 4px var(--klingon-primary);
+}
+
+/* Borg Collective Theme - Base Styling Only */
+.terminal-borg {
+  --terminal-bg: rgba(0, 0, 0, 0.3);
+  --terminal-border: 2px solid var(--borg-primary);
+  --terminal-text: var(--borg-primary);
+  --terminal-font: var(--borg-font);
+  --terminal-shadow: 0 0 30px rgba(0, 255, 65, 0.6), inset 0 0 20px rgba(0, 255, 65, 0.1);
+  --prompt-color: var(--borg-primary);
+  --cursor-color: var(--borg-primary);
+  --titlebar-bg: linear-gradient(90deg, 
+    rgba(0, 255, 65, 0.25) 0%, 
+    rgba(0, 0, 0, 0.9) 50%, 
+    rgba(0, 255, 65, 0.25) 100%);
+  --titlebar-text: var(--borg-primary);
+  --titlebar-font: var(--borg-font);
+  
+  border-radius: 8px;
+  backdrop-filter: blur(12px) saturate(180%);
+  animation: borg-system-pulse 3s ease-in-out infinite;
+}
+
+/* Borg Geometric Node Panels */
+.terminal-borg::before {
+  content: '';
+  position: absolute;
+  left: -80px;
+  top: 30px;
+  width: 120px;
+  height: 120px;
+  background: radial-gradient(circle, 
+    rgba(0, 255, 65, 0.4) 0%, 
+    rgba(0, 200, 65, 0.2) 70%,
+    rgba(0, 100, 65, 0.1) 100%);
+  backdrop-filter: blur(10px);
+  border: 2px solid var(--borg-primary);
+  box-shadow: 0 0 40px var(--borg-primary), inset 0 0 20px rgba(0, 255, 65, 0.3);
+  border-radius: 50%;
+  z-index: -1;
+  animation: borg-node-pulse 4s ease-in-out infinite;
+}
+
+.terminal-borg::after {
+  content: '';
+  position: absolute;
+  right: -60px;
+  top: 50px;
+  width: 100px;
+  height: 100px;
+  background: radial-gradient(circle, 
+    rgba(0, 255, 65, 0.3) 0%, 
+    rgba(0, 200, 65, 0.2) 70%,
+    rgba(0, 150, 65, 0.1) 100%);
+  backdrop-filter: blur(10px);
+  border: 2px solid var(--borg-secondary);
+  box-shadow: 0 0 35px var(--borg-secondary), inset 0 0 15px rgba(0, 200, 65, 0.3);
+  border-radius: 50%;
+  z-index: -1;
+  animation: borg-node-pulse 4s ease-in-out infinite reverse;
+}
+
+/* Star Trek Base Animations */
+@keyframes panelPulse {
+  0%, 100% { 
+    opacity: var(--trek-panel-opacity); 
+    transform: scale(1) translateY(0px);
+  }
+  50% { 
+    opacity: 1; 
+    transform: scale(1.02) translateY(-2px);
+  }
+}
+
+@keyframes klingon-flicker {
+  0%, 90%, 100% { opacity: 1; }
+  5%, 85% { opacity: 0.8; }
+}
+
+/* Panel pulse animation - reduced movement */
+@keyframes klingon-battle-pulse {
+  0%, 100% { 
+    opacity: var(--trek-panel-opacity);
+    transform: scale(1) rotate(0deg);
+  }
+  50% { 
+    opacity: 0.9; 
+    transform: scale(1.03) rotate(0.5deg);
+  }
+}
+
+@keyframes borg-system-pulse {
+  0%, 100% { 
+    box-shadow: 0 0 20px rgba(0, 255, 65, 0.4);
+    border-color: var(--borg-primary);
+  }
+  50% { 
+    box-shadow: 0 0 40px rgba(0, 255, 65, 0.8);
+    border-color: var(--borg-secondary);
+  }
+}
+
+@keyframes borg-node-pulse {
+  0%, 100% { 
+    opacity: 0.7; 
+    transform: scale(1);
+    box-shadow: 0 0 30px var(--borg-primary);
+  }
+  50% { 
+    opacity: 1; 
+    transform: scale(1.05);
+    box-shadow: 0 0 50px var(--borg-primary);
+  }
+}

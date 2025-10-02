@@ -1,0 +1,211 @@
+/* Font Imports */
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Antic+Didone&family=Hind+Guntur:wght@300;400;500;600;700&family=SUSE:wght@100&family=Special+Elite&display=swap');
+
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+/* Import our modular CSS files */
+@import '../styles/terminal.css';
+@import '../styles/themes.css';
+@import '../styles/star-trek-themes.css';
+@import '../styles/borg-glitch.css';
+
+@layer base {
+  html {
+    overflow-x: hidden;
+  }
+  
+  body {
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    background: var(--bg-color);
+    color: var(--text-color);
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+
+  /* Default CSS Variables - can be overridden by themes */
+  :root {
+    --bg-color: #282a36;
+    --text-color: #f8f8f2;
+    --accent-green: #50fa7b;
+    --accent-cyan: #8be9fd;
+    --accent-purple: #bd93f9;
+    --accent-pink: #ff79c6;
+    --accent-yellow: #f1fa8c;
+    --accent-orange: #ffb86c;
+    --accent-red: #ff5555;
+    
+    /* Terminal-specific variables */
+    --terminal-text: #f8f8f2;
+    --prompt-color: #50fa7b;
+    --cursor-color: #50fa7b;
+    --output-border: #bd93f9;
+  }
+
+  [data-theme="light"] {
+    --bg-color: #f8f8f2;
+    --text-color: #44475a;
+    --terminal-text: #44475a;
+    --prompt-color: #0066cc;
+    --cursor-color: #0066cc;
+  }
+
+  /* Force theme fonts with high specificity */
+.terminal-lcars input,
+.terminal-lcars .terminal-body {
+  font-family: 'Orbitron', sans-serif !important;
+}
+
+.terminal-klingon input,
+.terminal-klingon .terminal-body {
+  font-family: 'Special Elite', system-ui !important;
+}
+
+.terminal-borg input,
+.terminal-borg .terminal-body {
+  font-family: 'Share Tech Mono', monospace !important;
+}
+
+  /* Global Scrollbar - uses theme variables */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: var(--bg-color);
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: var(--accent-purple);
+    border-radius: 4px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--accent-pink);
+  }
+}
+
+@layer components {
+  /* Remove hardcoded terminal styling - let themes.css handle it */
+  .terminal-window {
+    @apply rounded-lg shadow-2xl overflow-hidden transition-all duration-300;
+    /* All styling now comes from CSS variables set by themes */
+  }
+
+  .terminal-header {
+    @apply px-4 py-2 flex items-center space-x-2 border-b;
+    /* Colors handled by theme CSS variables */
+  }
+
+  .terminal-body {
+    @apply p-4 h-full overflow-y-auto text-sm leading-relaxed;
+    font-family: var(--terminal-font, 'Fira Code', monospace);
+  }
+
+  .command-line {
+    @apply flex items-center mb-2;
+  }
+
+  /* Use CSS variables instead of hardcoded Tailwind classes */
+  .prompt {
+    @apply mr-2 font-semibold;
+    color: var(--prompt-color);
+    font-weight: var(--prompt-weight, 600);
+  }
+
+  .cursor {
+    @apply inline-block w-2 h-5 ml-1;
+    background: var(--cursor-color);
+    animation: cursor-blink 1s infinite, var(--cursor-animation);
+  }
+
+  .ghost-text {
+    @apply inline-block text-gray-500 opacity-60 italic;
+  }
+
+  .command-output {
+    @apply mb-4 pl-4 border-l-2;
+    border-color: var(--output-border);
+  }
+
+  .command-history {
+    @apply mb-4;
+  }
+
+  /* Window Controls */
+  .window-controls {
+    @apply flex gap-2 items-center;
+  }
+
+  .control-btn {
+    @apply w-3 h-3 rounded-full cursor-pointer transition-all duration-200;
+    display: block;
+  }
+
+  .close-btn { 
+    background: #ff5f56; 
+  }
+  
+  .minimize-btn { 
+    background: #ffbd2e; 
+  }
+  
+  .maximize-btn { 
+    background: #27ca3f; 
+  }
+
+  .control-btn:hover {
+    @apply scale-110;
+    filter: brightness(1.2);
+  }
+
+  /* Background Effects */
+  .matrix-rain {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0.1;
+  }
+
+  .matrix-char {
+    position: absolute;
+    color: var(--accent-green);
+    font-family: 'Fira Code', monospace;
+    animation: matrix-drop linear infinite;
+  }
+}
+
+@layer utilities {
+  .text-glow {
+    text-shadow: 0 0 10px currentColor;
+  }
+
+  .bg-pattern {
+    background-image: 
+      radial-gradient(circle at 1px 1px, rgba(255,255,255,0.1) 1px, transparent 0);
+    background-size: 20px 20px;
+  }
+}
+
+/* Core Animations */
+@keyframes cursor-blink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+
+@keyframes matrix-drop {
+  0% { transform: translateY(-100vh); opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { transform: translateY(100vh); opacity: 0; }
+}

@@ -1,0 +1,172 @@
+/* Theme System Coordinator */
+@import './star-trek-themes.css';
+/* @import './matrix-themes.css'; - for later */
+
+/* Theme CSS Variables */
+:root {
+  /* Matrix Theme */
+  --matrix-bg: #000000;
+  --matrix-primary: #00ff41;
+  --matrix-secondary: #008f11;
+  --matrix-accent: #39ff14;
+  --matrix-font: 'Fira Code', monospace;
+  
+  /* Light Theme */
+  --light-bg: #ffffff;
+  --light-primary: #333333;
+  --light-secondary: #666666;
+  --light-accent: #0066cc;
+  --light-font: 'Fira Code', monospace;
+}
+
+/* Theme Classes - Set CSS Variables */
+.terminal-matrix {
+  --terminal-bg: rgba(0, 0, 0, 0.95);
+  --terminal-border: 2px solid var(--matrix-primary);
+  --terminal-text: var(--matrix-primary);
+  --terminal-font: var(--matrix-font);
+  --terminal-shadow: 0 0 20px rgba(0, 255, 65, 0.5), inset 0 0 20px rgba(0, 255, 65, 0.1);
+  --prompt-color: var(--matrix-accent);
+  --output-border: var(--matrix-secondary);
+  --cursor-color: var(--matrix-accent)!important;
+  --cursor-animation: cursor-blink 1s infinite, matrix-glow 2s ease-in-out infinite;
+}
+
+.terminal-lcars {
+  --terminal-bg: linear-gradient(135deg, rgba(0, 0, 51, 0.95) 0%, rgba(0, 0, 102, 0.95) 100%);
+  --terminal-border: 3px solid var(--lcars-primary);
+  --terminal-text: var(--lcars-primary);
+  --terminal-font: var(--lcars-font);
+  --prompt-color: var(--lcars-accent);
+  --prompt-weight: 700;
+  --cursor-color: cursor-blink 1s infinite, var(--lcars-accent)!important;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 600;
+  animation: lcars-pulse 4s ease-in-out infinite;
+}
+
+.terminal-klingon {
+  --terminal-bg: linear-gradient(135deg, rgba(26, 0, 0, 0.95) 0%, rgba(102, 0, 0, 0.95) 100%);
+  --terminal-border: 3px solid var(--klingon-primary);
+  --terminal-text: var(--klingon-primary);
+  --terminal-font: var(--klingon-font)!important;
+  --prompt-color: var(--klingon-accent);
+  --prompt-weight: 800;
+  --cursor-color: cursor-blink 1s infinite, var(--klingon-accent);
+  --output-border: var(--klingon-secondary);
+  text-shadow: 0 0 10px var(--klingon-accent);
+  font-weight: 600;
+  animation: klingon-flicker 5s ease-in-out infinite;
+}
+
+.terminal-borg {
+  --terminal-bg: linear-gradient(135deg, rgba(0, 17, 0, 0.95) 0%, rgba(0, 34, 0, 0.95) 100%);
+  --terminal-border: 2px solid var(--borg-primary);
+  --terminal-text: var(--borg-primary);
+  --terminal-font: var(--borg-font);
+  --prompt-color: var(--borg-secondary);
+  --cursor-color: cursor-blink 1s infinite, var(--borg-secondary);
+  --output-border: var(--borg-secondary);
+  animation: borg-scan 3s linear infinite;
+  box-shadow: 0 0 15px rgba(0, 255, 65, 0.3), inset 0 0 15px rgba(0, 204, 170, 0.2);
+}
+
+.terminal-light {
+  --terminal-bg: rgba(255, 255, 255, 0.98);
+  --terminal-border: 2px solid var(--light-secondary);
+  --terminal-text: var(--light-primary);
+  --terminal-font: var(--light-font);
+  --prompt-color: var(--light-accent);
+  --prompt-weight: 600;
+  --cursor-color: var(--light-accent)!important;
+  --output-border: var(--light-secondary);
+  --cursor-animation: cursor-blink 1s infinite;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+/* Title Bar Themes */
+.titlebar-matrix {
+  --titlebar-bg: linear-gradient(90deg, rgba(0, 255, 65, 0.2) 0%, rgba(0, 0, 0, 0.9) 100%);
+  --titlebar-border: 1px solid var(--matrix-primary);
+  --titlebar-text: var(--matrix-primary);
+}
+
+.titlebar-lcars {
+  --titlebar-bg: linear-gradient(90deg, var(--lcars-primary) 0%, var(--lcars-secondary) 50%, var(--lcars-panel) 100%);
+  --titlebar-border: 2px solid var(--lcars-accent);
+  --titlebar-text: var(--lcars-accent);
+  --titlebar-font: var(--lcars-font);
+  --titlebar-weight: 700;
+  --titlebar-transform: uppercase;
+  --titlebar-spacing: 1px;
+}
+
+.titlebar-klingon {
+  --titlebar-bg: linear-gradient(90deg, var(--klingon-primary) 0%, var(--klingon-secondary) 100%);
+  --titlebar-border: 2px solid var(--klingon-accent);
+  --titlebar-text: var(--klingon-accent);
+  --titlebar-font: var(--klingon-font);
+  --titlebar-weight: 600;
+}
+
+.titlebar-borg {
+  --titlebar-bg: linear-gradient(90deg, rgba(0, 255, 65, 0.3) 0%, rgba(0, 204, 170, 0.3) 100%);
+  --titlebar-border: 1px solid var(--borg-primary);
+  --titlebar-text: var(--borg-primary);
+  --titlebar-font: var(--borg-font);
+}
+
+.titlebar-light {
+  --titlebar-bg: linear-gradient(90deg, #f0f0f0 0%, #e0e0e0 100%);
+  --titlebar-border: 1px solid var(--light-secondary);
+  --titlebar-text: var(--light-primary);
+  --titlebar-font: var(--light-font);
+}
+
+
+/* Theme-specific Scrollbars */
+.terminal-matrix::-webkit-scrollbar-thumb { 
+  background: var(--matrix-secondary); 
+}
+.terminal-lcars::-webkit-scrollbar-thumb { 
+  background: var(--lcars-secondary); 
+}
+.terminal-klingon::-webkit-scrollbar-thumb { 
+  background: var(--klingon-secondary); 
+}
+.terminal-borg::-webkit-scrollbar-thumb { 
+  background: var(--borg-secondary); 
+}
+.terminal-light::-webkit-scrollbar-thumb { 
+  background: var(--light-secondary); 
+}
+
+/* Theme Animations */
+@keyframes matrix-glow {
+  0%, 100% { text-shadow: 0 0 5px var(--matrix-primary), 0 0 10px var(--matrix-primary); }
+  50% { text-shadow: 0 0 10px var(--matrix-primary), 0 0 20px var(--matrix-primary), 0 0 30px var(--matrix-primary); }
+}
+
+@keyframes lcars-pulse {
+  0%, 100% { box-shadow: 0 0 5px var(--lcars-primary); }
+  50% { box-shadow: 0 0 15px var(--lcars-primary), 0 0 25px var(--lcars-accent); }
+}
+
+@keyframes klingon-glow {
+  0%, 100% { 
+    opacity: 0.4;
+    transform: scale(1);
+  }
+  50% { 
+    opacity: 0.8;
+    transform: scale(1.2);
+  }
+}
+
+@keyframes borg-scan {
+  0% { border-color: var(--borg-primary); }
+  50% { border-color: var(--borg-secondary); }
+  100% { border-color: var(--borg-primary); }
+}
+
